@@ -158,7 +158,7 @@ def iterativ_dfs(maze, row, col):
   goalrow = maze.height-1
   goalcol = maze.exit-1
   stack.append((startrow,startcol,'start'))
-  solutions.append((startrow,startcol,'exit'))
+  solutions.append((startrow,startcol,'start'))
   print(f"initiating iterative dfs with entrance [0][{startcol}] and exit [{goalrow}][{goalcol}]")
   #modify startnode to wall north off
   maze.maze[startrow][startcol].value = int(maze.maze[startrow][startcol].value)+1
@@ -187,7 +187,7 @@ def iterativ_dfs(maze, row, col):
       if int(walls[3]) == 0:
         solutions.append((row,col,direction))
         stack.append((row-1,col,'north'))
-      #solutions.remove((row,col,direction))
+      solutions.remove((row,col,direction))
 
 def generateSolution(maze):
   solution = []
@@ -205,12 +205,15 @@ def generateSolution(maze):
 #def printSolution()
 
 solutionRute = []
-myMaze = Labyrinth(*load_prop("400x566_11860.dat"))
+myMaze = Labyrinth(*load_prop("5x5_32736.dat"))
 #myMaze.showLab()
 #dfs(myMaze,0, (myMaze.entrance-1))
-#pruneMaze(myMaze)
+pruneMaze(myMaze)
 solution = iterativ_dfs(myMaze, 0,myMaze.entrance-1)
 #print(solution)
+print(list(dict.fromkeys(solution)))
+#print(solution)
+
 #dfs(myMaze,0, (myMaze.entrance-1))
 
 #number_to_walls(9)
