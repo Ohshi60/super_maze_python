@@ -146,7 +146,6 @@ def pruneMaze(maze):
         count = count + 1 
   while count:
     print(f"Pruning complete. # of nodes pruned {count}")
-
     count = pruneMaze(maze)
   
   return count
@@ -159,7 +158,7 @@ def iterativ_dfs(maze, row, col):
   goalrow = maze.height-1
   goalcol = maze.exit-1
   stack.append((startrow,startcol,'start'))
-
+  solutions.append((startrow,startcol,'exit'))
   print(f"initiating iterative dfs with entrance [0][{startcol}] and exit [{goalrow}][{goalcol}]")
   #modify startnode to wall north off
   maze.maze[startrow][startcol].value = int(maze.maze[startrow][startcol].value)+1
@@ -169,7 +168,7 @@ def iterativ_dfs(maze, row, col):
     cell = maze.maze[row][col]
     if cell.visited != True:
       cell.visited = True
-      solutions.append((row,col,direction))
+      #solutions.append((row,col,direction))
       if row == goalrow and col ==  goalcol:
         print("Congratulations you found the exit")
         solutions.append((row,col,'exit'))
@@ -188,7 +187,7 @@ def iterativ_dfs(maze, row, col):
       if int(walls[3]) == 0:
         solutions.append((row,col,direction))
         stack.append((row-1,col,'north'))
-      solutions.remove((row,col,direction))
+      #solutions.remove((row,col,direction))
 
 def generateSolution(maze):
   solution = []
